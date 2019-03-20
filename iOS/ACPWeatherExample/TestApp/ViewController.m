@@ -31,7 +31,7 @@
 
     // retrieve the weather conditions for current zipcode by calling the getWeatherByZipCode public API
     [WeatherExtension getWeatherByZipCode:[zipString integerValue] callback:^(WeatherExtensionDataObject * _Nullable weather) {
-        NSLog(@"Received response callback from weather extension: %@", weather);
+        NSLog(@"Received  response callback from weather extension: %@", weather);
         dispatch_async(dispatch_get_main_queue(), ^{
             self.lblConditions.text = weather.conditions ? weather.conditions : @"Unknown";
             self.lblTemperature.text = [NSString stringWithFormat:@"%0.0f ℉", weather.temperature];
