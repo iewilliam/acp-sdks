@@ -14,14 +14,14 @@ jobs: # a basic unit of work in a run
       - checkout  # pull down code from your version control system.
       - restore_cache:
           keys:
-            - cocoapods-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "iOS/ACPWeatherExample/Gemfile.lock" }}
+            - cocoapods-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "iOS/ACPWeatherExample/Podfile.lock" }}
             - cocoapods-cache-v1-{{ arch }}-{{ .Branch }}
             - cocoapods-cache-v1      
       - run:
           name: Update pod
           command: cd iOS/ACPWeatherExample && pod update
       - save_cache:
-          key: cocoapods-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "iOS/ACPWeatherExample/Gemfile.lock" }}
+          key: cocoapods-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "iOS/ACPWeatherExample/Podfile.lock" }}
           paths:
             - iOS/ACPWeatherExample/Pods
             - ~/.cocoapods
