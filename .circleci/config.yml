@@ -1,11 +1,4 @@
 version: 2 # use version 2.0 of CircleCI
-dependencies:
-  pre:
-    # hide curl progress bar but show errors, if any
-    - curl -sS https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash
-  cache_directories:
-    - “~/.cocoapods”
-    - "iOS/ACPWeatherExample/Pods"
 jobs: # a basic unit of work in a run
   build: # runs not using `Workflows` must have a `build` job as entry point
     macos:  # indicate that we are using the macOS executor
