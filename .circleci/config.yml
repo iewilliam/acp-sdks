@@ -5,6 +5,9 @@ jobs: # a basic unit of work in a run
       xcode: "10.0.0" # indicate our selected version of Xcode
     steps: # a series of commands to run
       - checkout  # pull down code from your version control system.
+      - run:
+          name: checksum Podfile.lock before cache restore
+          command: cksum iOS/ACPWeatherExample/Podfile.lock
       - restore_cache:
           keys:
             - cocoapods-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "iOS/ACPWeatherExample/Podfile.lock" }}
@@ -13,6 +16,9 @@ jobs: # a basic unit of work in a run
       - run:
           name: Update pod
           command: cd iOS/ACPWeatherExample && pod update
+      - run:
+          name: checksum Podfile.lock after cache restore
+          command: cksum iOS/ACPWeatherExample/Podfile.lock          
       - save_cache:
           key: cocoapods-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "iOS/ACPWeatherExample/Podfile.lock" }}
           paths:
