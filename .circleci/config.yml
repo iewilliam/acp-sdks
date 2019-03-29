@@ -8,6 +8,9 @@ jobs: # a basic unit of work in a run
       - run:
           name: checksum Podfile.lock before cache restore
           command: cksum iOS/ACPWeatherExample/Podfile.lock
+      - store_artifacts:
+          path: iOS/ACPWeatherExample/Podfile.lock
+          destination: preCacheRestorePodfile.lock          
       - restore_cache:
           keys:
             - cocoapods-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "iOS/ACPWeatherExample/Podfile.lock" }}
@@ -19,6 +22,9 @@ jobs: # a basic unit of work in a run
       - run:
           name: checksum Podfile.lock after cache restore
           command: cksum iOS/ACPWeatherExample/Podfile.lock          
+      - store_artifacts:
+          path: iOS/ACPWeatherExample/Podfile.lock
+          destination: postPodUpdatePodfile.lock          
       - save_cache:
           key: cocoapods-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "iOS/ACPWeatherExample/Podfile.lock" }}
           paths:
